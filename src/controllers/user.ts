@@ -21,13 +21,15 @@ export const loginUser = async (req: Request, res: Response) => {
       });
     }
     const connection = await dbConnection();
+    console.log('connection: ', connection);
     const [rows] = await connection.execute<RowDataPacket[]>(
       `SELECT *
       FROM UsuarioRolVista
       WHERE usuario_alias = ?`,
       [user]
     );
-    await connection.end();
+    console.log('user: ', user);
+    //await connection.end();
     const existeUser = isArray(rows) && rows.length > 0 ? rows[0] : null;
     if (!existeUser) {
       return res.status(400).json({

@@ -18,30 +18,44 @@ Este es la aplicacion backend de un sistema de registro de solicitudes de cambio
 
 ## Instalación de dependencias
 ***
-Una pequeña introducción sobre la instalación.
+
 ```
 $ npm install
 ```
+## Ejecucion por container
 
-## Collaboration
+```
+$ docker build -t app-utp-backend .
+$ docker compose up
+```
+
+## Conexion de Base de datos Mysql en caso falle en docker la conexion
+ Por defecto estas son las configuraciones que tiene para conectarse:
+ - BD_USERNAME="root"
+ - BD_PASSWORD=""
+ - BD_HOST="localhost"
+ - BD_PORT=3306
+
+## Creacion de Base de datos en caso falle en docker las conexion
+```
+$ CREATE DATABASE databaseutp;
+$ USE databaseutp;
+```
+Luego importar el query que es el archivo "database.sql " y ejecutarlo.
+
+## Desplegar aplicacion
+```
+$ npm run tsc
+$ npm run start
+```
+
+
+
+
+
+
+## Ejecucion de pruebas
 ***
-Give instructions on how to collaborate with your project.
-> Maybe you want to write a quote in this part. 
-> It should go over several rows?
-> This is how you do it.
-## FAQs
-***
-A list of frequently asked questions
-1. **This is a question in bold**
-Answer of the first question with _italic words_. 
-2. __Second question in bold__ 
-To answer this question we use an unordered list:
-* First point
-* Second Point
-* Third point
-3. **Third question in bold**
-Answer of the third question with *italic words*.
-4. **Fourth question in bold**
-| Headline 1 in the tablehead | Headline 2 in the tablehead | Headline 3 in the tablehead |
-|:--------------|:-------------:|--------------:|
-| text-align left | text-align center | text-align right |
+```
+$ npx jest
+```
