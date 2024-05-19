@@ -12,7 +12,7 @@ export async function dbConnection() {
       database: process.env.BD_NAME,
       port: Number(process.env.BD_PORT),
     });
-    console.log('Base de datos conectada ... ');
+    
     return connection;
   } catch (error: any) {
     throw new Error(error);

@@ -1,8 +1,22 @@
 version: '1.0'
-
 services:
-  
-
+  app:
+    image: app-utp-backend
+    ports:
+      - 4050:4050
+    depends_on:
+      - db
+    networks:
+      - network_backend
+    environment:
+      - PORT=4050
+      - BASE_URL=http://localhost:4050
+      - BD_NAME=databaseutp
+      - BD_USERNAME=root
+      - BD_PASSWORD=root
+      - BD_HOST=db # Nombre del servicio de la base de datos
+      - BD_PORT=3306
+      - SECRET_KEY_JWT=c7&5ux#8pa3ay-kUS2Ok
   db:
     image: mysql:8.1
     environment:
@@ -11,14 +25,13 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - db_data:/var/lib/mysql
       - ./database.sql:/docker-entrypoint-initdb.d/database.sql
-
-  app:
-    image: app-utp-backend
-    ports:
-      - 4050:4050
-    depends_on:
-      - db
+    networks:
+      - network_backend
+networks:
+  network_backend:
+    driver: bridge
+  
+  
 
   

@@ -100,6 +100,7 @@ export const sendChangeNote = async (req: Request, res: Response) => {
     const [rows] = await connection.execute<RowDataPacket[]>(`CALL InsertarSolicitud(?,?,?,?,?)`, [
       Number(user_id),Number(coordinador),Number(nota_nueva),urlImage,Number(nota_id)
     ]);
+    
     await connection.end();
     res.status(200).json({
       success: true,

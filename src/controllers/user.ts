@@ -20,15 +20,16 @@ export const loginUser = async (req: Request, res: Response) => {
         msg: "Campos errados",
       });
     }
+
     const connection = await dbConnection();
-    console.log('connection: ', connection);
+
     const [rows] = await connection.execute<RowDataPacket[]>(
       `SELECT *
-      FROM UsuarioRolVista
-      WHERE usuario_alias = ?`,
+      FROM usuariorolvista
+      WHERE usuario_alias = ?;`,
       [user]
     );
-    console.log('user: ', user);
+
     //await connection.end();
     const existeUser = isArray(rows) && rows.length > 0 ? rows[0] : null;
     if (!existeUser) {
